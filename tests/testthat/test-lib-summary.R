@@ -7,6 +7,12 @@ test_that("lib_summary returns expected results", {
     expect_type(res$n_packages, "integer")
 })
 
-test_that("lib_summary fails appropriately",{
-    expect_error(lib_summary("foo"), "unused argument")
+test_that("lib_summary fails appropriately", {
+    expect_error(lib_summary("foo"), "'sizes' must be either TRUE or FALSE")
+})
+
+test_that("sizes argument work", {
+    res <- lib_summary(sizes = TRUE)
+    expect_equal(names(res), c("library", "n_packages", "lib_size"))
+    expect_type(res$lib_size, "double")
 })
